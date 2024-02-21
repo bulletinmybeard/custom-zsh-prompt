@@ -17,7 +17,7 @@ custom_prompt() {
       return
     fi
 
-    # Build the shortened path,
+    # Build the shortened path.
     result="${path_parts[1]}"
     for (( i = 2; i <= path_length - 1; i++ )); do
       if (( ${#result} + 4 + ${#path_parts[i]} + ${#current_directory} < max_length )); then
