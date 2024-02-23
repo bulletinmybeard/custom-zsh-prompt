@@ -19,22 +19,32 @@ custom_prompt() {
 
     # Build the shortened path.
     result="${path_parts[1]}"
-    for (( i = 2; i <= path_length - 1; i++ )); do
+    for (( i = 2; i < path_length; i++ )); do
       if (( ${#result} + 4 + ${#path_parts[i]} + ${#current_directory} < max_length )); then
         result="${result}/${path_parts[i]}"
       else
+        result="${result}/..."
         break
       fi
     done
-
-    echo "${result}/.../${current_directory}"
+  
+    echo "${result}"
   }
 
   local shortened_path=$(shorten_path "${relative_path}")
-  if [[ "${shortened_path}" == "${relative_path}" ]]; then
-    display_path="%{%F{cyan}%}${relative_path}%b"
+  local path_without_current="${shortened_path%/*}"
+
+  # Determine if the path was actually shortened by checking for presence of `...`
+  if [[ "${shortened_path}" == *"..."* || "${relative_path}" != *"/"* ]]; then
+    # Path was shortened, apply formatting to both parts
+    display_path="%{%F{cyan}%}${path_without_current}/.../%b%{%F{82}%}%B${current_directory}%b%{%f%}"
   else
-    display_path="%{%F{cyan}%}${shortened_path}%b"
+    # Path was not shortened, apply distinct formatting only to the current directory
+    if [[ "${relative_path}" == "~" || "${relative_path}" == "" ]]; then
+      display_path="%{%F{82}%}%B${current_directory}%b%{%f%}"
+    else
+      display_path="%{%F{cyan}%}${relative_path%/*}/%b%{%F{82}%}%B${current_directory}%b%{%f%}"
+    fi
   fi
 
   PROMPT='%(?:%{%F{green}%}%1{➜%} :%{%F{red}%}%1{➜%} )'"${display_path} $(git_prompt_info)"
