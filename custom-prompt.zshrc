@@ -88,6 +88,9 @@ custom_prompt() {
 # Call the function to set the initial prompt.
 custom_prompt
 
-# Automatically update the prompt when changing directories.
+# Load add-zsh-hook function
 autoload -Uz add-zsh-hook
+
+# Automatically update the prompt when changing directories and before each command execution
 add-zsh-hook chpwd custom_prompt
+add-zsh-hook precmd custom_prompt
