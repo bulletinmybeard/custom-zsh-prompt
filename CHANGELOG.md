@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.6.0] - 2024-08-24
+### Added
+- New `custom_prompt_vars` helper function to manage custom prompt environment variables:
+  - status: Display current status of all supported environment variables
+- Introduced reload_zsh helper function to easily reload the Zsh session
+
+### Changed
+- Completely refactored `custom_prompt()` function for improved reliability and performance
+- Enhanced customization options for Git-related colors in the prompt:
+  - Added `ZSH_CUSTOM_PROMPT_GIT_BRACKET_COLOR` for Git status brackets
+  - Added `ZSH_CUSTOM_PROMPT_GIT_BRANCH_COLOR` for branch names
+- Updated `README` with comprehensive documentation on new features and customization options
+- Overall prompt responsiveness and consistency across different environments
+
 ## [1.3.0] - 2024-03-01
 ### Added
 - A second `zsh-hook` was added to automatically run the `custom_prompt` function when changing directories and before executing each command.
