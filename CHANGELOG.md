@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2024-03-01
+### Added
+- A second `zsh-hook` was added to automatically run the `custom_prompt` function when changing directories and before executing each command.
+
 ## [1.2.2] - 2024-02-24
 ### Added
 - A new `custom-prompt.zshrc` file has been created, merging the two functions from `full-path.zshrc` and `shortened-path.zshrc`.
